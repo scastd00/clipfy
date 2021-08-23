@@ -1,5 +1,7 @@
 <template>
-  <div class="blue pt-6">Hello</div>
+  <div class="blue pt-6">
+    &nbsp;
+  </div>
 </template>
 
 <script>
@@ -9,8 +11,4 @@ export default {
 </script>
 
 <style scoped>
-.navigation {
-  padding: 16px;
-  background-color: red;
-}
 </style>
