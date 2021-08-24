@@ -1,9 +1,12 @@
 import Vue from 'vue';
+import Vuetify from 'vuetify';
+
 import App from './App';
 import router from './router';
-import Vuetify from 'vuetify';
-import { sync } from 'vuex-router-sync';
 import store from '@/store/store';
+import vuetifyTheme from './plugins/vuetify';
+
+import { sync } from 'vuex-router-sync';
 
 import 'vuetify/dist/vuetify.min.css';
 
@@ -12,10 +15,10 @@ Vue.use(Vuetify);
 sync(store, router);
 
 new Vue({
-    vuetify: new Vuetify(),
+    vuetify: new Vuetify(vuetifyTheme),
     el: '#app',
     router,
     store,
     components: { App },
     template: '<App/>'
-}).$mount('#app');
+});

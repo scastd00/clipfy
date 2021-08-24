@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
     strict: true,
     state: {
         token: null,
@@ -14,14 +14,12 @@ const store = new Vuex.Store({
     mutations: {
         setToken(state, token) {
             state.token = token;
-        }
+        },
     },
 
     actions: {
-        setToken({commit}, token) {
+        setToken({ commit }, token) {
             commit('setToken', token);
-        }
+        },
     }
 });
-
-export default store;

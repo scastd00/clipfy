@@ -9,7 +9,7 @@ module.exports = {
             dialect: process.env.DIALECT || 'sqlite',
             host: process.env.HOST || 'localhost',
             storage: './clipfy.sqlite',
-            // logging: false // Prevent printing SQL queries
+            logging: false // Prevent printing SQL queries
         }
     },
 
