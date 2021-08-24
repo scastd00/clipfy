@@ -1,14 +1,15 @@
 <template>
-  <div>
+  <v-container>
+    <!-- Dark mode -> Light mode -->
     <v-tooltip
-      v-if="!$vuetify.theme.dark"
+      v-if="$vuetify.theme.dark"
       bottom
     >
       <template
         v-slot:activator="{ on }"
       >
         <v-btn
-          class="switcherBTN"
+          class="transparent elevation-0"
           v-on="on"
           dark
           small
@@ -16,17 +17,19 @@
           @click="darkMode"
         >
           <v-icon
-            class="mr-1"
+            color="secondary"
           >
-            mdi-moon-waxing-crescent
+            {{ darkThemeIcon }}
           </v-icon>
         </v-btn>
       </template>
+
       <span>
-        Dark Mode
+        Light Mode
       </span>
     </v-tooltip>
 
+    <!-- Light mode -> Dark mode -->
     <v-tooltip
       v-else
       bottom
@@ -35,6 +38,7 @@
         v-slot:activator="{ on }"
       >
         <v-btn
+          class="transparent elevation-0"
           v-on="on"
           light
           small
@@ -42,28 +46,39 @@
           @click="darkMode"
         >
           <v-icon
-            color="black"
+            class="mr-1"
+            color="accent"
           >
-            mdi-white-balance-sunny
+            {{ lightThemeIcon }}
           </v-icon>
         </v-btn>
       </template>
+
       <span>
-        Light Mode
+        Dark Mode
       </span>
     </v-tooltip>
-  </div>
+  </v-container>
 </template>
 
 <script>
-export default {
-    name: 'ThemeSwitcher',
+import { mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@mdi/js';
 
-    methods: {
-        darkMode() {
-            this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-        }
+export default {
+  name: 'ThemeSwitcher',
+
+  data() {
+    return {
+      lightThemeIcon: mdiMoonWaningCrescent,
+      darkThemeIcon: mdiWhiteBalanceSunny
+    };
+  },
+
+  methods: {
+    darkMode() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     }
+  }
 };
 </script>
 

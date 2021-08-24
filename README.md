@@ -1,6 +1,14 @@
-# client
+# Clipfy app
 
-> Client for Clipfy app
+A Vue.js / Express project for an e-commerce website.
+<br>
+It consists of two main folders:
+
+```
+  /
+  |- client (Frontend) -> Components, forms, etc.
+  |- server (Backend)  -> User registration / validation, database
+```
 
 ## Build Setup
 
@@ -17,5 +25,3 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

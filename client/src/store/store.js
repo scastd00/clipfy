@@ -4,22 +4,22 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    strict: true,
-    state: {
-        token: null,
-        user: null,
-        isUserLoggedIn: false
-    },
+  strict: true,
+  state: {
+    token: null,
+    user: null,
+    isUserLoggedIn: false
+  },
 
-    mutations: {
-        setToken(state, token) {
-            state.token = token;
-        },
+  mutations: {
+    setToken(state, token) {
+      state.token = token;
     },
+  },
 
-    actions: {
-        setToken({ commit }, token) {
-            commit('setToken', token);
-        },
-    }
+  actions: {
+    setToken({ commit }, token) {
+      commit('setToken', token);
+    },
+  }
 });

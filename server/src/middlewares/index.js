@@ -1,18 +1,18 @@
 function notFound(req, res, next) {
-    const error = new Error(`${req.originalUrl} Not found.`);
-    res.status(404);
-    next(error);
+  const error = new Error(`${req.originalUrl} Not found.`);
+  res.status(404);
+  next(error);
 }
 
 function errorHandler(error, req, res, next) {
-    res.status(res.statusCode || 500);
-    res.json({
-        message: error.message,
-        error: process.env.NODE_ENV === 'production' ? {} : error.stack
-    });
+  res.status(res.statusCode || 500);
+  res.json({
+    message: error.message,
+    error: process.env.NODE_ENV === 'production' ? {} : error.stack
+  });
 }
 
 module.exports = {
-    notFound,
-    errorHandler
+  notFound,
+  errorHandler
 };

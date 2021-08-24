@@ -1,3 +1,2 @@
-# Important
-    - Dark mode switcher.
-    - Select better color palette.
+# Todo list
+	- Login and register users functionality (frontend and backend)

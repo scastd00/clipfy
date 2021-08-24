@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main class="background">
+    <v-main>
       <div id="app">
         <navigation-bar/>
         <router-view/>
@@ -13,11 +13,11 @@
 import NavigationBar from '@components/NavigationBar';
 
 export default {
-    name: 'App',
+  name: 'App',
 
-    components: {
-        NavigationBar
-    }
+  components: {
+    NavigationBar
+  }
 };
 </script>
 

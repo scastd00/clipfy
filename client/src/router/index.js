@@ -5,11 +5,11 @@ import MainPage from '@components/MainPage';
 Vue.use(Router);
 
 export default new Router({
-    routes: [
-        {
-            path: '/',
-            name: 'MainPage',
-            component: MainPage
-        }
-    ]
+  routes: [
+    {
+      path: '/',
+      name: 'MainPage',
+      component: MainPage
+    }
+  ]
 });

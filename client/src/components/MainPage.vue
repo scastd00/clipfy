@@ -6,13 +6,13 @@
 
 <script>
 export default {
-    name: 'MainPage',
+  name: 'MainPage',
 
-    data() {
-        return {
-            msg: 'Bienvenido a Clipfy'
-        };
-    }
+  data() {
+    return {
+      msg: 'Bienvenido a Clipfy'
+    };
+  }
 };
 </script>
 

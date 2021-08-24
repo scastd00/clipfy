@@ -15,10 +15,10 @@ Vue.use(Vuetify);
 sync(store, router);
 
 new Vue({
-    vuetify: new Vuetify(vuetifyTheme),
-    el: '#app',
-    router,
-    store,
-    components: { App },
-    template: '<App/>'
+  vuetify: new Vuetify(vuetifyTheme),
+  el: '#app',
+  router,
+  store,
+  components: { App },
+  template: '<App/>'
 });
