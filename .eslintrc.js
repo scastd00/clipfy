@@ -27,7 +27,7 @@ module.exports = {
     'space-before-function-paren': ['error', 'never'],
     'space-in-parens': ['error', 'never'],
     'max-len': ['error', {
-      code: 100,
+      code: 120,
       comments: 100
     }],
     'multiline-ternary': ['error', 'never'],

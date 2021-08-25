@@ -3,33 +3,35 @@
     block
     class="primary"
   >
-    <v-toolbar-title
-      class="clipfy-home"
-      @click="navigateTo({ name: 'MainPage' })"
-    >
-      Clipfy
-    </v-toolbar-title>
+    <v-toolbar-items>
+      <v-btn
+        class="elevation-0 transparent pl-4 clipfy-home"
+        @click="navigateTo({ name: 'MainPage' })"
+      >
+        Clipfy
+      </v-btn>
+    </v-toolbar-items>
 
     <v-spacer/>
 
     <v-toolbar-items>
-      <theme-switcher/>
-      <navigation-user/>
+      <app-bar-theme-switcher/>
+      <app-bar-user/>
     </v-toolbar-items>
 
   </v-toolbar>
 </template>
 
 <script>
-import ThemeSwitcher from '@components/ThemeSwitcher';
-import NavigationUser from '@components/NavigationUser';
+import AppBarThemeSwitcher from '@components/AppBarThemeSwitcher';
+import AppBarUser from '@components/AppBarUser';
 
 export default {
   name: 'NavigationBar',
 
   components: {
-    ThemeSwitcher,
-    NavigationUser
+    AppBarThemeSwitcher,
+    AppBarUser
   },
 
   methods: {
