@@ -1,6 +1,7 @@
 const { User } = require('../models');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
+import { StatusCodes } from 'http-status-codes';
 
 function jwtSignUser(user) {
   return jwt.sign(user, config.authentication.jwtSecret, {
@@ -11,14 +12,15 @@ function jwtSignUser(user) {
 module.exports = {
   async register(req, res) {
     try {
-      const userJson = await User.create(req.body).toJSON();
+      const user = await User.create(req.body);
+      const userJson = user.toJSON();
 
       res.send({
         user: userJson,
         token: jwtSignUser(userJson)
       });
     } catch (e) {
-      res.status(400).send({
+      res.status(StatusCodes.BAD_REQUEST).send({
         error: 'This email account is already in use. Please try again.'
       });
     }
@@ -34,7 +36,7 @@ module.exports = {
       });
 
       if (!user) {
-        return res.status(404).send({
+        return res.status(StatusCodes.NOT_FOUND).send({
           error: 'User does not exist in the database'
         });
       }
@@ -42,19 +44,19 @@ module.exports = {
       const isValidPassword = await user.validatePassword(password);
 
       if (!isValidPassword) {
-        return res.status(401).send({
+        return res.status(StatusCodes.UNAUTHORIZED).send({
           error: 'Invalid password'
         });
       }
 
       const userJson = user.toJSON();
 
-      res.status(200).send({
+      res.send({
         user: userJson,
         token: jwtSignUser(userJson)
       });
     } catch (e) {
-      res.status(500).send({
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
         error: 'Invalid login information'
       });
     }

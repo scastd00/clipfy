@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { StatusCodes } = require('http-status-codes');
 
 module.exports = {
   register(req, res, next) {
@@ -12,13 +13,13 @@ module.exports = {
     if (error) { // Error is not null or undefined
       switch (error.details[0].context.key) {
       case 'email':
-        res.status(400).send({
+        res.status(StatusCodes.BAD_REQUEST).send({
           error: 'The email address provided must be valid'
         });
         break;
 
       case 'password':
-        res.status(400).send({
+        res.status(StatusCodes.BAD_REQUEST).send({
           error: `The password provided failed to match the following rules:
               1. It must contain ONLY the following characters: lower/upper case and numerics.
               2. It must be between 8 and 32 characters in length.`
@@ -26,7 +27,7 @@ module.exports = {
         break;
 
       default:
-        res.status(400).send({
+        res.status(StatusCodes.BAD_REQUEST).send({
           error: 'Invalid credentials'
         });
       }

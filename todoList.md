@@ -1,5 +1,5 @@
 # Todo list
-	- Login and register users functionality (frontend and backend)
+	- Login with other type of account (Google, etc)
 	- Footer with information
 
 # Future
