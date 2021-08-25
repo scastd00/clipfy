@@ -1,19 +1,18 @@
 <template>
   <div>
     <v-toolbar
-      rounded
-      elevation="1"
       block
       dark
+      class="accent rounded-t elevation-0"
     >
-      <v-toolbar-title class="primary--text">
+      <v-toolbar-title>
         {{ title }}
       </v-toolbar-title>
 
       <slot name="action"></slot>
     </v-toolbar>
 
-    <div class="elevation-3 pl-4 pr-4 pt-2 pb-2">
+    <div class="elevation-3 pl-4 pr-4 pt-2 pb-2 _credentials rounded-b">
       <slot>
         No slot content defined.
       </slot>

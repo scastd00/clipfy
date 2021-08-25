@@ -23,13 +23,19 @@
                 v-model="password"
               />
 
-              <div class="pt-1 pb-1" v-if="!!error">
+              <div
+                class="pt-1 pb-1"
+                v-if="!!error"
+              >
                 <v-alert type="error">
                   Error: {{ error }}
                 </v-alert>
               </div>
 
-              <v-btn @click="login">
+              <v-btn
+                class="accent elevation-2"
+                @click="login"
+              >
                 Login
               </v-btn>
             </credentials-card>

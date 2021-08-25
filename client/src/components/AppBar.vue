@@ -6,7 +6,9 @@
     <v-toolbar-items>
       <v-btn
         class="elevation-0 transparent pl-4 clipfy-home"
-        @click="navigateTo({ name: 'MainPage' })"
+        @click="navigateTo({
+          name: $store.state.isUserLoggedIn ? 'home' : 'landing'
+        })"
       >
         Clipfy
       </v-btn>
@@ -36,7 +38,7 @@ export default {
 
   methods: {
     navigateTo(route) {
-      if (this.$router.currentRoute.name !== 'MainPage') {
+      if (this.$router.currentRoute.name !== route.name) {
         this.$router.push(route);
       }
     }

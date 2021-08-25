@@ -1,7 +1,7 @@
 const { User } = require('../models');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-import { StatusCodes } from 'http-status-codes';
+const { StatusCodes } = require('http-status-codes');
 
 function jwtSignUser(user) {
   return jwt.sign(user, config.authentication.jwtSecret, {
