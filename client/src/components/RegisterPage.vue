@@ -1,13 +1,13 @@
 <template>
   <credentials-card title="Register">
     <form name="clipfy-register">
-<!--      <v-text-field-->
-<!--        counter="20"-->
-<!--        required-->
-<!--        :rules="[required]"-->
-<!--        label="Username"-->
-<!--        v-model="username"-->
-<!--      />-->
+      <v-text-field
+        counter="20"
+        required
+        :rules="[required]"
+        label="Username"
+        v-model="username"
+      />
 
       <v-text-field
         required
@@ -53,7 +53,7 @@ export default {
 
   data() {
     return {
-      // username: '',
+      username: '',
       email: '',
       password: '',
       error: null,
@@ -69,15 +69,12 @@ export default {
     async register() {
       try {
         const response = await AuthenticationService.register({
+          username: this.username,
           email: this.email,
           password: this.password
         });
 
-        await this.$store.dispatch('setUser', {
-          user: response.data.user,
-          // username: response.data.user.username
-        });
-        await this.$store.dispatch('setToken', response.data.token);
+        await this.dispatchData(response.data);
 
         this.error = null; // Clear the error when data is entered correctly
 
@@ -85,6 +82,11 @@ export default {
       } catch (e) {
         this.error = e.response.data.error;
       }
+    },
+
+    dispatchData(data) {
+      this.$store.dispatch('setUser', data.user);
+      this.$store.dispatch('setToken', data.token);
     }
   }
 };

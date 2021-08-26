@@ -1,6 +1,7 @@
 # Todo list
 
 - Login with other type of account (Google, etc.)
+- "Logged as: {username}" message when accessed the page in a small green popup
 - Footer with information
 - Profile page to view and modify it (email, password, etc.).
 - Navigation bar under AppBar with popular item categories.

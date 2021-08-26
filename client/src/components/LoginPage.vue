@@ -58,10 +58,7 @@ export default {
           password: this.password
         });
 
-        await this.$store.dispatch('setUser', {
-          user: response.data.user
-        });
-        await this.$store.dispatch('setToken', response.data.token);
+        await this.dispatchData(response.data);
 
         this.error = null; // Clear the error when data is entered correctly
 
@@ -69,6 +66,11 @@ export default {
       } catch (e) {
         this.error = e.response.data.error;
       }
+    },
+
+    dispatchData(data) {
+      this.$store.dispatch('setUser', data.user);
+      this.$store.dispatch('setToken', data.token);
     }
   }
 };

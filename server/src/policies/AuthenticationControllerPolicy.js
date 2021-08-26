@@ -4,7 +4,7 @@ const { StatusCodes } = require('http-status-codes');
 module.exports = {
   register(req, res, next) {
     const schema = Joi.object({
-      // username: Joi.string().alphanum().min(3).max(20),
+      username: Joi.string().alphanum().min(3).max(20),
       email: Joi.string().email(),
       password: Joi.string().alphanum().min(8).max(32)
     });
@@ -13,11 +13,11 @@ module.exports = {
 
     if (error) { // Error is not null or undefined
       switch (error.details[0].context.key) {
-        // case 'username':
-        //   res.status(StatusCodes.BAD_REQUEST).send({
-        //     error: 'Username must contain only alphanumeric characters and must be between 3 and 20 characters'
-        //   });
-        //   break;
+        case 'username':
+          res.status(StatusCodes.BAD_REQUEST).send({
+            error: 'Username must contain only alphanumeric characters and must be between 3 and 20 characters'
+          });
+          break;
 
         case 'email':
           res.status(StatusCodes.BAD_REQUEST).send({
