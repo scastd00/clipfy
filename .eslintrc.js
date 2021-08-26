@@ -1,14 +1,15 @@
 module.exports = {
   root: true,
+
   parserOptions: {
     parser: 'babel-eslint'
   },
+
   env: {
     browser: true,
     node: true,
   },
-  // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-  // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
+
   extends: ['plugin:vue/essential', 'eslint:recommended'],
   // required to lint *.vue files
   plugins: [
@@ -16,7 +17,7 @@ module.exports = {
   ],
 
   rules: {
-    indent: ['error', 2],
+    indent: ['error', 2, { "SwitchCase": 1 }],
     semi: ['error', 'always'],
     quotes: ['warn', 'single',
       {

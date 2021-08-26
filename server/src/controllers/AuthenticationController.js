@@ -37,7 +37,7 @@ module.exports = {
 
       if (!user) {
         return res.status(StatusCodes.NOT_FOUND).send({
-          error: 'User does not exist in the database'
+          error: 'User does not exist in the database.'
         });
       }
 
@@ -45,7 +45,7 @@ module.exports = {
 
       if (!isValidPassword) {
         return res.status(StatusCodes.UNAUTHORIZED).send({
-          error: 'Invalid password'
+          error: 'Invalid password.'
         });
       }
 
@@ -57,7 +57,7 @@ module.exports = {
       });
     } catch (e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
-        error: 'Invalid login information'
+        error: 'Invalid login information.'
       });
     }
   }

@@ -1,52 +1,47 @@
 <template>
-  <v-container>
-    <v-row
-      no-gutters
-      align="center"
-      justify="center"
+  <credentials-card title="Register">
+    <form name="clipfy-register">
+<!--      <v-text-field-->
+<!--        counter="20"-->
+<!--        required-->
+<!--        :rules="[required]"-->
+<!--        label="Username"-->
+<!--        v-model="username"-->
+<!--      />-->
+
+      <v-text-field
+        required
+        :rules="[required]"
+        label="Email"
+        v-model="email"
+      />
+
+      <v-text-field
+        counter="32"
+        required
+        :rules="[required]"
+        type="password"
+        label="Password"
+        v-model="password"
+      />
+    </form>
+
+    <div
+      class="py-1"
+      v-if="!!error"
     >
-      <v-col/>
+      <v-alert type="error">
+        Error: {{ error }}
+      </v-alert>
+    </div>
 
-      <v-col>
-        <v-layout>
-          <v-flex>
-
-            <credentials-card title="Register">
-              <v-text-field
-                label="Email"
-                v-model="email"
-              />
-
-              <v-text-field
-                type="password"
-                label="Password"
-                v-model="password"
-              />
-
-              <div
-                class="pt-1 pb-1"
-                v-if="!!error"
-              >
-                <v-alert type="error">
-                  Error: {{ error }}
-                </v-alert>
-              </div>
-
-              <v-btn
-                class="accent"
-                @click="register"
-              >
-                Register
-              </v-btn>
-            </credentials-card>
-
-          </v-flex>
-        </v-layout>
-      </v-col>
-
-      <v-col/>
-    </v-row>
-  </v-container>
+    <v-btn
+      class="accent"
+      @click="register"
+    >
+      Register
+    </v-btn>
+  </credentials-card>
 </template>
 
 <script>
@@ -58,9 +53,11 @@ export default {
 
   data() {
     return {
+      // username: '',
       email: '',
       password: '',
-      error: null
+      error: null,
+      required: (value) => !!value || 'Required'
     };
   },
 
@@ -76,10 +73,14 @@ export default {
           password: this.password
         });
 
-        await this.$store.dispatch('setUser', response.data.user);
+        await this.$store.dispatch('setUser', {
+          user: response.data.user,
+          // username: response.data.user.username
+        });
         await this.$store.dispatch('setToken', response.data.token);
 
         this.error = null; // Clear the error when data is entered correctly
+
         await this.$router.push({ name: 'home' });
       } catch (e) {
         this.error = e.response.data.error;

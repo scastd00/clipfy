@@ -51,5 +51,11 @@ export default {
   font-family: "Roboto", sans-serif;
   font-size: 32px;
   font-weight: bold;
+  transition: color 0.3s; /* Animation when hover off */
+}
+
+.clipfy-home:hover {
+  color: black;
+  transition: color 0.3s; /* Animation when hover on */
 }
 </style>

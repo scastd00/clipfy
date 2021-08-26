@@ -18,8 +18,8 @@ export default new Vuex.Store({
       state.isUserLoggedIn = !!token;
     },
 
-    setUser(state, user) {
-      state.user = user;
+    setUser(state, userData) {
+      state.user = userData.user;
     }
   },
 
@@ -28,8 +28,8 @@ export default new Vuex.Store({
       commit('setToken', token);
     },
 
-    setUser({ commit }, user) {
-      commit('setUser', user);
+    setUser({ commit }, userData) {
+      commit('setUser', userData);
     },
 
     clearData({commit}) {

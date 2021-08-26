@@ -1,12 +1,13 @@
 <template>
   <v-container>
-    <v-menu transition="slide-y-transition">
+    <v-menu>
       <template v-slot:activator="{ attrs, on }">
         <v-btn
           class="elevation-0 ml-1 mr-1 accent"
           v-bind="attrs"
           v-on="on"
-          rounded
+          small
+          fab
         >
           <v-icon>{{ userIcon }}</v-icon>
         </v-btn>
@@ -16,12 +17,10 @@
         <v-list-item
           v-for="option in activeUserOptions"
           :key="option.index"
+          @click="navigateTo({ name: option.title.toLowerCase()})"
           link
         >
-          <v-list-item-title
-            @click="navigateTo({ name: option.title.toLowerCase()})"
-            v-text="option.title"
-          />
+          <v-list-item-title v-text="option.title"/>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -41,28 +40,45 @@ export default {
   },
 
   computed: {
-    options: function() {
+    userOptions: function() {
+      const isUserLoggedIn = this.$store.state.isUserLoggedIn;
+
       return [
         {
           title: 'Login',
           index: 0,
-          isAccessible: !this.$store.state.isUserLoggedIn
+          isAccessible: !isUserLoggedIn
         },
         {
           title: 'Register',
           index: 1,
-          isAccessible: !this.$store.state.isUserLoggedIn
+          isAccessible: !isUserLoggedIn
+        },
+        {
+          title: 'Profile',
+          index: 2,
+          isAccessible: isUserLoggedIn
+        },
+        {
+          title: 'Orders',
+          index: 3,
+          isAccessible: isUserLoggedIn
+        },
+        {
+          title: 'Wishlist',
+          index: 4,
+          isAccessible: isUserLoggedIn
         },
         {
           title: 'Logout',
-          index: 2,
-          isAccessible: this.$store.state.isUserLoggedIn
+          index: 5,
+          isAccessible: isUserLoggedIn
         }
       ];
     },
 
     activeUserOptions: function() {
-      let optionsAux = JSON.parse(JSON.stringify(this.options));
+      let optionsAux = JSON.parse(JSON.stringify(this.userOptions));
       return optionsAux.filter((option) => {
         if (option.isAccessible) {
           return option;
@@ -71,7 +87,6 @@ export default {
     },
 
     accessible: function() {
-      console.log('Cambia el estado');
       return this.$store.state.isUserLoggedIn;
     }
   },
@@ -81,7 +96,8 @@ export default {
       if (route.name === 'logout') {
         this.$store.dispatch('clearData');
       }
-      if (this.$router.currentRoute.name !== route.name) {
+
+      if (route.name !== this.$router.currentRoute.name) {
         this.$router.push(route); // Avoiding redundant navigations to the same location
       }
     }

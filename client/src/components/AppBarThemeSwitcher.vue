@@ -11,13 +11,12 @@
         <v-btn
           class="transparent elevation-0"
           v-on="on"
-          dark
           small
           fab
           @click="darkMode"
         >
           <v-icon
-            color="secondary"
+            color="yellow"
           >
             {{ darkThemeIcon }}
           </v-icon>
@@ -40,14 +39,12 @@
         <v-btn
           class="transparent elevation-0"
           v-on="on"
-          light
           small
           fab
           @click="darkMode"
         >
           <v-icon
-            class="mr-1"
-            color="accent"
+            color="black"
           >
             {{ lightThemeIcon }}
           </v-icon>
