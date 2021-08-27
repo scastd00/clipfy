@@ -2,6 +2,7 @@
   <v-container>
     <v-menu>
       <template v-slot:activator="{ attrs, on }">
+        <!-- Todo: Hacer v-extension-panel -->
         <v-btn
           class="elevation-0 ml-1 mr-1 accent"
           v-bind="attrs"

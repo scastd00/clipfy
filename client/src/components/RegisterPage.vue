@@ -36,10 +36,19 @@
     </div>
 
     <v-btn
-      class="accent"
+      :loading="loading"
+      :disabled="loading"
+      class="accent elevation-2"
       @click="register"
+      width="16%"
+      min-width="160"
     >
       Register
+      <template v-slot:loader>
+        <span>
+          Registering...
+        </span>
+      </template>
     </v-btn>
   </credentials-card>
 </template>
@@ -57,6 +66,7 @@ export default {
       email: '',
       password: '',
       error: null,
+      loading: false,
       required: (value) => !!value || 'Required'
     };
   },
@@ -68,6 +78,8 @@ export default {
   methods: {
     async register() {
       try {
+        this.loading = true;
+
         const response = await AuthenticationService.register({
           username: this.username,
           email: this.email,
@@ -78,16 +90,20 @@ export default {
 
         this.error = null; // Clear the error when data is entered correctly
 
-        await this.$router.push({ name: 'home' });
+        setTimeout(() => {
+          this.loading = false;
+          this.$router.push({ name: 'home' });
+        }, 1000);
       } catch (e) {
         this.error = e.response.data.error;
+        this.loading = false;
       }
     },
 
     dispatchData(data) {
       this.$store.dispatch('setUser', data.user);
       this.$store.dispatch('setToken', data.token);
-    }
+    },
   }
 };
 </script>

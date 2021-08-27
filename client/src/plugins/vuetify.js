@@ -17,7 +17,8 @@ export default new Vuetify({
         info: '#2196F3',
         warning: '#FB8C00',
         error: '#FF5252',
-        _credentials: '#202020'
+        _credentials: '#202020',
+        _userCard: '#2a2a2a'
       },
 
       light: {

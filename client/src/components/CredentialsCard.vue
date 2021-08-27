@@ -31,8 +31,10 @@ export default {
   name: 'CredentialsCard',
 
   props: {
-    title: String,
-
+    title: {
+      type: String,
+      default: 'Credentials'
+    }
   }
 };
 </script>

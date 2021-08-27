@@ -13,7 +13,7 @@
           v-on="on"
           small
           fab
-          @click="darkMode"
+          @click="changeTheme"
         >
           <v-icon
             color="yellow"
@@ -39,13 +39,11 @@
         <v-btn
           class="transparent elevation-0"
           v-on="on"
+          @click="changeTheme"
           small
           fab
-          @click="darkMode"
         >
-          <v-icon
-            color="black"
-          >
+          <v-icon color="black">
             {{ lightThemeIcon }}
           </v-icon>
         </v-btn>
@@ -72,7 +70,7 @@ export default {
   },
 
   methods: {
-    darkMode() {
+    changeTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     }
   }
