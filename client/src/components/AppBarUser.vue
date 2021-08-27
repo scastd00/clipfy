@@ -10,7 +10,9 @@
           small
           fab
         >
-          <v-icon>{{ userIcon }}</v-icon>
+          <v-icon>
+            {{ userIcon }}
+          </v-icon>
         </v-btn>
       </template>
 
@@ -20,8 +22,13 @@
           :key="option.index"
           @click="navigateTo({ name: option.title.toLowerCase()})"
           link
+          dense
         >
-          <v-list-item-title v-text="option.title"/>
+          <v-list-item-title class="text-left" v-text="option.title"/>
+
+          <v-icon class="pl-4">
+            {{ option.icon }}
+          </v-icon>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -29,7 +36,15 @@
 </template>
 
 <script>
-import { mdiAccount } from '@mdi/js';
+import {
+  mdiAccount,
+  mdiLogin,
+  mdiBagPersonal,
+  mdiLogout,
+  mdiBadgeAccount,
+  mdiCardBulleted,
+  mdiCheckbook
+} from '@mdi/js';
 
 export default {
   name: 'NavigationUser',
@@ -48,32 +63,38 @@ export default {
         {
           title: 'Login',
           index: 0,
-          isAccessible: !isUserLoggedIn
+          isAccessible: !isUserLoggedIn,
+          icon: mdiLogin
         },
         {
           title: 'Register',
           index: 1,
-          isAccessible: !isUserLoggedIn
+          isAccessible: !isUserLoggedIn,
+          icon: mdiBagPersonal
         },
         {
           title: 'Profile',
           index: 2,
-          isAccessible: isUserLoggedIn
+          isAccessible: isUserLoggedIn,
+          icon: mdiBadgeAccount
         },
         {
           title: 'Orders',
           index: 3,
-          isAccessible: isUserLoggedIn
+          isAccessible: isUserLoggedIn,
+          icon: mdiCardBulleted
         },
         {
           title: 'Wishlist',
           index: 4,
-          isAccessible: isUserLoggedIn
+          isAccessible: isUserLoggedIn,
+          icon: mdiCheckbook
         },
         {
           title: 'Logout',
           index: 5,
-          isAccessible: isUserLoggedIn
+          isAccessible: isUserLoggedIn,
+          icon: mdiLogout
         }
       ];
     },

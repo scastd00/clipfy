@@ -13,6 +13,7 @@
   "dependencies": {
     "@mdi/js": "^5.9.55",
     "axios": "^0.21.1",
+    "vee-validate": "^3.4.11",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuetify": "^2.5.8",
