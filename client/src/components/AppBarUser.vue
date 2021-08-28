@@ -107,10 +107,6 @@ export default {
         }
       });
     },
-
-    accessible: function() {
-      return this.$store.state.isUserLoggedIn;
-    }
   },
 
   methods: {

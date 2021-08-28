@@ -60,5 +60,23 @@ module.exports = {
         error: 'Invalid login information.'
       });
     }
+  },
+
+  async changeEmail(req, res) {
+    try {
+      const { newEmail, oldEmail } = req.body;
+
+      await User.update({
+        email: newEmail
+      }, {
+        where: {
+          email: oldEmail
+        }
+      });
+    } catch (e) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+        error: 'Sorry. Cannot proceed with the change, try it again later.'
+      });
+    }
   }
 };

@@ -7,5 +7,9 @@ export default {
 
   login(credentials) {
     return Api().post('login', credentials);
+  },
+
+  changeEmail(emails) {
+    return Api().post('changeEmail', emails);
   }
 };

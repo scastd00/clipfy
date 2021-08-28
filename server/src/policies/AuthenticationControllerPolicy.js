@@ -41,5 +41,22 @@ module.exports = {
     } else {
       next(); // Executes AuthenticationController.register
     }
+  },
+
+  changeEmail(req, res, next) {
+    const schema = Joi.object({
+      newEmail: Joi.string().email(),
+      oldEmail: Joi.string(),
+    });
+
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      res.status(StatusCodes.BAD_REQUEST).send({
+        error: 'The email address provided is not valid.'
+      });
+    } else {
+      next(); // Executes AuthenticationController.changeEmail
+    }
   }
 };

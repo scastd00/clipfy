@@ -25,7 +25,7 @@
 
       <div class="_userCard">
         <div class="email pl-4 pt-7">
-          <span>Account email -- {{ this.user.email }}</span>
+          <span>Account email -- {{ email1.email }}</span>
 
           <span class="ml-6">
             <app-dialog>
@@ -61,7 +61,7 @@
               <template v-slot:content>
                 <v-text-field
                   label="Email"
-                  v-model="email"
+                  v-model="changeEmail"
                 >
                   Email
                 </v-text-field>
@@ -73,6 +73,15 @@
                 >
                   Confirm
                 </v-btn>
+
+                <div
+                  v-if="!!error"
+                  class="py-1"
+                >
+                  <v-alert type="error">
+                    Error: {{ error }}
+                  </v-alert>
+                </div>
 
                 <!-- Todo: Print some information about the change (valid, errors, etc.) -->
               </template>
@@ -89,12 +98,9 @@
 </template>
 
 <script>
-import {
-  mdiAccountEdit,
-  mdiFingerprint,
-  mdiInformation
-} from '@mdi/js';
+import { mdiAccountEdit, mdiFingerprint, mdiInformation } from '@mdi/js';
 import AppDialog from '@components/AppDialog';
+import AuthenticationService from '@/services/AuthenticationService';
 
 export default {
   name: 'Profile',
@@ -105,18 +111,42 @@ export default {
 
   data() {
     return {
-      email: '',
+      changeEmail: '',
       user: this.$store.state.user,
+      error: null,
       infoEmail: mdiInformation,
       passwordIcon: mdiFingerprint,
       editUsernameIcon: mdiAccountEdit
     };
   },
 
+  computed: {
+    currentUser: function() {
+      return this.$store.state.user;
+    },
+
+    email1: function() {
+      return this.$store.state.user;
+    }
+  },
+
   methods: {
-    checkNewEmail() {
-      // Todo
-      return false;
+    async checkNewEmail() {
+      try {
+        const user = this.$store.state.user;
+
+        await AuthenticationService.changeEmail({
+          oldEmail: user.email,
+          newEmail: this.changeEmail
+        });
+
+        user.email = this.changeEmail;
+        await this.$store.dispatch('setUser', user);
+
+        this.error = null;
+      } catch (e) {
+        this.error = e.response.data.error;
+      }
     }
   }
 };
