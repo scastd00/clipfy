@@ -8,7 +8,7 @@
       <v-toolbar dark class="accent rounded-t">
         <v-toolbar-title>
           <!-- Todo: add a small icon with the user's avatar -->
-          <h1>{{ this.user.username }}</h1>
+          <h1>{{ state.user.username }}</h1>
         </v-toolbar-title>
 
         <!-- Making toolbar title a text field or display a dialog with the new username -->
@@ -25,7 +25,7 @@
 
       <div class="_userCard">
         <div class="email pl-4 pt-7">
-          <span>Account email -- {{ email1.email }}</span>
+          <span>Account email -- {{ state.user.email }}</span>
 
           <span class="ml-6">
             <app-dialog>
@@ -112,7 +112,6 @@ export default {
   data() {
     return {
       changeEmail: '',
-      user: this.$store.state.user,
       error: null,
       infoEmail: mdiInformation,
       passwordIcon: mdiFingerprint,
@@ -121,26 +120,24 @@ export default {
   },
 
   computed: {
-    currentUser: function() {
-      return this.$store.state.user;
-    },
-
-    email1: function() {
-      return this.$store.state.user;
+    state: function() {
+      return this.$store.state;
     }
   },
 
   methods: {
     async checkNewEmail() {
       try {
-        const user = this.$store.state.user;
+        const user = { ...this.$store.state.user }; // Cloning to not have a reference (crash)
 
-        await AuthenticationService.changeEmail({
+        const response = await AuthenticationService.changeEmail({
           oldEmail: user.email,
           newEmail: this.changeEmail
         });
 
-        user.email = this.changeEmail;
+        user.email = response.data.newEmail;
+        console.log('User cambio: ', user.email);
+        console.log('state antes: ', this.$store.state.user.email);
         await this.$store.dispatch('setUser', user);
 
         this.error = null;

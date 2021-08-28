@@ -73,6 +73,8 @@ module.exports = {
           email: oldEmail
         }
       });
+
+      res.send(req.body);
     } catch (e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
         error: 'Sorry. Cannot proceed with the change, try it again later.'
