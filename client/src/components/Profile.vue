@@ -8,7 +8,7 @@
       <v-toolbar dark class="accent rounded-t">
         <v-toolbar-title>
           <!-- Todo: add a small icon with the user's avatar -->
-          <h1>{{ state.user.username }}</h1>
+          <h1>{{ newUser.username }}</h1>
         </v-toolbar-title>
 
         <!-- Making toolbar title a text field or display a dialog with the new username -->
@@ -25,9 +25,9 @@
 
       <div class="_userCard">
         <div class="email pl-4 pt-7">
-          <span>Account email -- {{ state.user.email }}</span>
+          <span>Account email -- {{ newUser.email }}</span>
 
-          <span class="ml-6">
+          <span class="ml-4">
             <app-dialog>
               <template v-slot:buttonText>
                 <span>Change</span>
@@ -120,8 +120,8 @@ export default {
   },
 
   computed: {
-    state: function() {
-      return this.$store.state;
+    newUser: function() {
+      return this.$store.state.user;
     }
   },
 
@@ -136,8 +136,6 @@ export default {
         });
 
         user.email = response.data.newEmail;
-        console.log('User cambio: ', user.email);
-        console.log('state antes: ', this.$store.state.user.email);
         await this.$store.dispatch('setUser', user);
 
         this.error = null;

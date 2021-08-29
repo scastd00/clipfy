@@ -22,7 +22,6 @@
           :key="option.index"
           @click="navigateTo({ name: option.title.toLowerCase()})"
           link
-          dense
         >
           <v-list-item-title class="text-left" v-text="option.title"/>
 
