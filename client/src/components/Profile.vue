@@ -12,15 +12,43 @@
         </v-toolbar-title>
 
         <!-- Making toolbar title a text field or display a dialog with the new username -->
-        <v-btn
-          class="ml-6 elevation-3"
-          small
-          fab
-        >
-          <v-icon>
-            {{ editUsernameIcon }}
-          </v-icon>
-        </v-btn>
+        <span class="ml-4">
+          <app-dialog>
+            <template v-slot:buttonText>
+              <v-icon>
+                {{ editUsernameIcon }}
+              </v-icon>
+            </template>
+
+            <template v-slot:title>
+              <strong>Change username</strong>
+            </template>
+
+            <template v-slot:content>
+              <v-text-field
+                label="Username"
+                v-model="username"
+              />
+
+              <v-btn
+                color="accent"
+                min-width="110"
+                @click="changeUsername"
+              >
+                Confirm
+              </v-btn>
+
+              <div
+                v-if="!!error"
+                class="mt-5"
+              >
+                <v-alert type="error">
+                  Error: {{ error }}
+                </v-alert>
+              </div>
+            </template>
+          </app-dialog>
+        </span>
       </v-toolbar>
 
       <div class="_userCard">
@@ -34,7 +62,7 @@
               </template>
 
               <template v-slot:title>
-                Change email
+                <strong>Change email</strong>
 
                 <!-- Information icon  -->
                 <template>
@@ -61,29 +89,25 @@
               <template v-slot:content>
                 <v-text-field
                   label="Email"
-                  v-model="changeEmail"
-                >
-                  Email
-                </v-text-field>
+                  v-model="email"
+                />
 
                 <v-btn
                   color="accent"
                   min-width="110"
-                  @click="checkNewEmail"
+                  @click="changeEmail"
                 >
                   Confirm
                 </v-btn>
 
                 <div
                   v-if="!!error"
-                  class="py-1"
+                  class="mt-5"
                 >
                   <v-alert type="error">
                     Error: {{ error }}
                   </v-alert>
                 </div>
-
-                <!-- Todo: Print some information about the change (valid, errors, etc.) -->
               </template>
             </app-dialog>
           </span>
@@ -111,7 +135,8 @@ export default {
 
   data() {
     return {
-      changeEmail: '',
+      username: this.$store.state.user.username,
+      email: this.$store.state.user.email,
       error: null,
       infoEmail: mdiInformation,
       passwordIcon: mdiFingerprint,
@@ -126,21 +151,45 @@ export default {
   },
 
   methods: {
-    async checkNewEmail() {
-      try {
-        const user = { ...this.$store.state.user }; // Cloning to not have a reference (crash)
+    async changeEmail() {
+      const currentUser = this.$store.state.user;
 
-        const response = await AuthenticationService.changeEmail({
-          oldEmail: user.email,
-          newEmail: this.changeEmail
-        });
+      if (this.email === currentUser.email) {
+        this.error = 'New email should be different from the current one';
+      } else {
+        try {
+          const response = await AuthenticationService.changeEmail({
+            oldEmail: currentUser.email,
+            newEmail: this.email
+          });
 
-        user.email = response.data.newEmail;
-        await this.$store.dispatch('setUser', user);
+          await this.$store.dispatch('setUserEmail', response.data.email);
 
-        this.error = null;
-      } catch (e) {
-        this.error = e.response.data.error;
+          this.error = null;
+        } catch (e) {
+          this.error = e.response.data.error;
+        }
+      }
+    },
+
+    async changeUsername() {
+      const user = this.$store.state.user;
+
+      if (this.username === user.username) {
+        this.error = 'The new username should be different from the current one';
+      } else {
+        try {
+          const response = await AuthenticationService.changeUsername({
+            email: user.email,
+            newUsername: this.username
+          });
+
+          await this.$store.dispatch('setUserUsername', response.data.username);
+
+          this.error = null;
+        } catch (e) {
+          this.error = e.response.data.error;
+        }
       }
     }
   }

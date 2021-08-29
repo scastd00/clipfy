@@ -20,6 +20,14 @@ export default new Vuex.Store({
 
     setUser(state, user) {
       state.user = user;
+    },
+
+    setUserEmail(state, email) {
+      state.user.email = email;
+    },
+
+    setUserUsername(state, username) {
+      state.user.username = username;
     }
   },
 
@@ -30,6 +38,14 @@ export default new Vuex.Store({
 
     setUser({ commit }, user) {
       commit('setUser', user);
+    },
+
+    setUserEmail({ commit }, email) {
+      commit('setUserEmail', email);
+    },
+
+    setUserUsername({ commit }, username) {
+      commit('setUserUsername', username);
     },
 
     clearData({ commit }) {

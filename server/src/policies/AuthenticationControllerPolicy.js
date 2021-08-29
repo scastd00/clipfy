@@ -46,7 +46,7 @@ module.exports = {
   changeEmail(req, res, next) {
     const schema = Joi.object({
       newEmail: Joi.string().email(),
-      oldEmail: Joi.string(),
+      oldEmail: Joi.string()
     });
 
     const { error } = schema.validate(req.body);
@@ -57,6 +57,23 @@ module.exports = {
       });
     } else {
       next(); // Executes AuthenticationController.changeEmail
+    }
+  },
+
+  changeUsername(req, res, next) {
+    const schema = Joi.object({
+      email: Joi.string().email(),
+      newUsername: Joi.string().alphanum().min(3).max(20)
+    });
+
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      res.status(StatusCodes.BAD_REQUEST).send({
+        error: 'New username does not meet the requirements (alphanumeric, 3-20 characters in length).'
+      });
+    } else {
+      next(); // Executes AuthenticationController.changeUsername
     }
   }
 };

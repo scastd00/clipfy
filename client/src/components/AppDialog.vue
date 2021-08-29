@@ -1,7 +1,6 @@
 <template>
   <v-dialog
     v-model="dialog"
-    transition="dialog-top-transition"
     persistent
     max-width="600"
   >
@@ -26,15 +25,16 @@
 
       <v-card-actions>
         <v-spacer/>
+        <!-- Class y color are cool -->
         <v-btn
-          color="accent lighten-2"
+          class="error"
           @click="dialog = false"
           text
         >
           Cancel
         </v-btn>
         <v-btn
-          color="accent lighten-2"
+          class="success"
           @click="dialog = false"
           text
         >

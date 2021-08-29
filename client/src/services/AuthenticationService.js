@@ -11,5 +11,9 @@ export default {
 
   changeEmail(emails) {
     return Api().post('changeEmail', emails);
+  },
+
+  changeUsername(information) {
+    return Api().post('changeUsername', information);
   }
 };

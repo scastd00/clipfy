@@ -74,10 +74,34 @@ module.exports = {
         }
       });
 
-      res.send(req.body);
+      res.send({
+        email: newEmail
+      });
     } catch (e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
         error: 'Sorry. Cannot proceed with the change, try it again later.'
+      });
+    }
+  },
+
+  async changeUsername(req, res) {
+    try {
+      const { email, newUsername } = req.body;
+
+      await User.update({
+        username: newUsername
+      }, {
+        where: {
+          email: email
+        }
+      });
+
+      res.send({
+        username: newUsername
+      });
+    } catch (e) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+        error: 'Cannot change username, try it again later.'
       });
     }
   }
