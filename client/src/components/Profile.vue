@@ -114,7 +114,79 @@
         </div>
 
         <div class="password pl-4 pt-3">
+          <span>
+            Password
+          </span>
 
+          <span class="ml-4">
+            <app-dialog>
+              <template v-slot:buttonText>
+                <span>Change</span>
+              </template>
+
+              <template v-slot:title>
+                <strong>Change password</strong>
+
+                <!-- Information icon  -->
+                <template>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon
+                        color="warning"
+                        v-bind="attrs"
+                        v-on="on"
+                        class="ml-3"
+                      >
+                        {{ infoPassword }}
+                      </v-icon>
+                    </template>
+                    <!--   <span>-->
+                    <!--     If you change the account email, you will-->
+                    <!--     <br/>-->
+                    <!--     receive a message to check that it is valid-->
+                    <!--   </span>-->
+                  </v-tooltip>
+                </template>
+              </template>
+
+              <template v-slot:content>
+                <v-text-field
+                  label="Current password"
+                  type="password"
+                  v-model="currentPassword"
+                />
+
+                <v-text-field
+                  label="New password"
+                  type="password"
+                  v-model="newPassword"
+                />
+
+                <v-text-field
+                  label="Verify password"
+                  type="password"
+                  v-model="verifyPassword"
+                />
+
+                <v-btn
+                  color="accent"
+                  min-width="110"
+                  @click="changePassword"
+                >
+                  Confirm
+                </v-btn>
+
+                <div
+                  v-if="!!error"
+                  class="mt-5"
+                >
+                  <v-alert type="error">
+                    Error: {{ error }}
+                  </v-alert>
+                </div>
+              </template>
+            </app-dialog>
+          </span>
         </div>
       </div>
     </v-flex>
@@ -137,6 +209,9 @@ export default {
     return {
       username: this.$store.state.user.username,
       email: this.$store.state.user.email,
+      currentPassword: '',
+      newPassword: '',
+      verifyPassword: '',
       error: null,
       infoEmail: mdiInformation,
       passwordIcon: mdiFingerprint,
@@ -166,6 +241,7 @@ export default {
           await this.$store.dispatch('setUserEmail', response.data.email);
 
           this.error = null;
+          await this.$router.push({ name: 'profile' });
         } catch (e) {
           this.error = e.response.data.error;
         }
@@ -191,6 +267,10 @@ export default {
           this.error = e.response.data.error;
         }
       }
+    },
+
+    async changePassword() {
+
     }
   }
 };

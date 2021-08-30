@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import LandingPage from '@components/LandingPage';
+import MainPage from '@components/MainPage';
 import LoginPage from '@components/LoginPage';
 import RegisterPage from '@components/RegisterPage';
 import HomePage from '@components/HomePage';
@@ -13,8 +13,8 @@ Vue.use(Router);
 
 export default new Router({
   routes: [
-    { path: '/', name: 'landing', component: LandingPage },
-    { path: '/', name: 'logout', component: LandingPage },
+    { path: '/', name: 'landing', component: MainPage },
+    { path: '/', name: 'logout', component: MainPage },
     { path: '/login', name: 'login', component: LoginPage },
     { path: '/register', name: 'register', component: RegisterPage },
     { path: '/home', name: 'home', component: HomePage },

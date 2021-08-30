@@ -12,6 +12,7 @@
     - Register
   - User logged in:
     - More options in dropdown menu with user image.
+- Orders will be named and user can add items to them (order card have item count in that order).
 
 # Future
 
