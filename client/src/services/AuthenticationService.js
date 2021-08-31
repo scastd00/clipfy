@@ -15,5 +15,9 @@ export default {
 
   changeUsername(information) {
     return Api().post('changeUsername', information);
+  },
+
+  changePassword(passwords) {
+    return Api().post('changePassword', passwords);
   }
 };

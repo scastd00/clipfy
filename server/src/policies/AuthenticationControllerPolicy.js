@@ -15,7 +15,7 @@ module.exports = {
       switch (error.details[0].context.key) {
         case 'username':
           res.status(StatusCodes.BAD_REQUEST).send({
-            error: 'Username must contain only alphanumeric characters and must be between 3 and 20 characters'
+            error: 'Username must contain only alphanumeric characters and must be between 3 and 20 characters.'
           });
           break;
 
@@ -46,7 +46,7 @@ module.exports = {
   changeEmail(req, res, next) {
     const schema = Joi.object({
       newEmail: Joi.string().email(),
-      oldEmail: Joi.string()
+      oldEmail: Joi.string().email()
     });
 
     const { error } = schema.validate(req.body);
@@ -74,6 +74,39 @@ module.exports = {
       });
     } else {
       next(); // Executes AuthenticationController.changeUsername
+    }
+  },
+
+  changePassword(req, res, next) {
+    const schema = Joi.object({
+      userEmail: Joi.string().email(),
+      password: Joi.string().alphanum().min(3).max(20),
+      newPassword: Joi.string().alphanum().min(3).max(20)
+    });
+
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      switch (error.details[0].context.key) {
+        case 'password':
+          res.status(StatusCodes.BAD_REQUEST).send({
+            error: 'Your password does not meet the requirements.'
+          });
+          break;
+
+        case 'newPassword':
+          res.status(StatusCodes.BAD_REQUEST).send({
+            error: 'New password is invalid (alphanumeric, 3-20 characters in length).'
+          });
+          break;
+
+        default:
+          res.status(StatusCodes.BAD_REQUEST).send({
+            error: 'Invalid credentials.'
+          });
+      }
+    } else {
+      next();
     }
   }
 };

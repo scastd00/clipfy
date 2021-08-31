@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   },
   {
     hooks: {
-      beforeCreate: hashPassword
+      beforeSave: hashPassword
     }
   });
 

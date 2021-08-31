@@ -28,6 +28,10 @@ export default new Vuex.Store({
 
     setUserUsername(state, username) {
       state.user.username = username;
+    },
+
+    setUserPassword(state, password) {
+      state.user.password = password;
     }
   },
 
@@ -46,6 +50,10 @@ export default new Vuex.Store({
 
     setUserUsername({ commit }, username) {
       commit('setUserUsername', username);
+    },
+
+    setUserPassword({ commit }, password) {
+      commit('setUserPassword', password);
     },
 
     clearData({ commit }) {

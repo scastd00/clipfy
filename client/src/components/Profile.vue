@@ -1,10 +1,6 @@
 <template>
   <v-layout class="text-left">
     <v-flex xs8 offset-xs2 class="elevation-6 mt-7">
-      <!-- Username -->
-      <!-- Email -->
-      <!-- Change password? -->
-
       <v-toolbar dark class="accent rounded-t">
         <v-toolbar-title>
           <!-- Todo: add a small icon with the user's avatar -->
@@ -12,7 +8,7 @@
         </v-toolbar-title>
 
         <!-- Making toolbar title a text field or display a dialog with the new username -->
-        <span class="ml-4">
+        <span class="username ml-4">
           <app-dialog>
             <template v-slot:buttonText>
               <v-icon>
@@ -74,7 +70,7 @@
                         v-on="on"
                         class="ml-3"
                       >
-                        {{ infoEmail }}
+                        {{ infoTooltipIcon }}
                       </v-icon>
                     </template>
                     <span>
@@ -113,10 +109,8 @@
           </span>
         </div>
 
-        <div class="password pl-4 pt-3">
-          <span>
-            Password
-          </span>
+        <div class="password pl-4 pt-5 pb-7">
+          <span>Password</span>
 
           <span class="ml-4">
             <app-dialog>
@@ -137,14 +131,12 @@
                         v-on="on"
                         class="ml-3"
                       >
-                        {{ infoPassword }}
+                        {{ infoTooltipIcon }}
                       </v-icon>
                     </template>
-                    <!--   <span>-->
-                    <!--     If you change the account email, you will-->
-                    <!--     <br/>-->
-                    <!--     receive a message to check that it is valid-->
-                    <!--   </span>-->
+                    <span>
+                      Password <!-- Todo -->
+                    </span>
                   </v-tooltip>
                 </template>
               </template>
@@ -153,7 +145,7 @@
                 <v-text-field
                   label="Current password"
                   type="password"
-                  v-model="currentPassword"
+                  v-model="password"
                 />
 
                 <v-text-field
@@ -194,7 +186,7 @@
 </template>
 
 <script>
-import { mdiAccountEdit, mdiFingerprint, mdiInformation } from '@mdi/js';
+import { mdiAccountEdit, mdiInformation } from '@mdi/js';
 import AppDialog from '@components/AppDialog';
 import AuthenticationService from '@/services/AuthenticationService';
 
@@ -209,12 +201,11 @@ export default {
     return {
       username: this.$store.state.user.username,
       email: this.$store.state.user.email,
-      currentPassword: '',
+      password: '',
       newPassword: '',
       verifyPassword: '',
       error: null,
-      infoEmail: mdiInformation,
-      passwordIcon: mdiFingerprint,
+      infoTooltipIcon: mdiInformation,
       editUsernameIcon: mdiAccountEdit
     };
   },
@@ -270,7 +261,25 @@ export default {
     },
 
     async changePassword() {
+      if (this.newPassword !== this.verifyPassword) {
+        this.error = 'Passwords do not match';
+      } else {
+        const user = this.$store.state.user;
 
+        try {
+          const response = await AuthenticationService.changePassword({
+            userEmail: user.email,
+            password: this.password,
+            newPassword: this.newPassword
+          });
+
+          await this.$store.dispatch('setUserPassword', response.data.encryptedPassword);
+
+          this.error = null;
+        } catch (e) {
+          this.error = e.response.data.error;
+        }
+      }
     }
   }
 };

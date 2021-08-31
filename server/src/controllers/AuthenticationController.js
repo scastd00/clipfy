@@ -104,5 +104,42 @@ module.exports = {
         error: 'Cannot change username, try it again later.'
       });
     }
+  },
+
+  async changePassword(req, res) {
+    try {
+      const { userEmail, password, newPassword } = req.body;
+
+      const user = await User.findOne({
+        where: {
+          email: userEmail
+        }
+      });
+
+      if (!user) {
+        return res.status(StatusCodes.NOT_FOUND).send({
+          error: 'User not found.'
+        });
+      }
+
+      const isValidPassword = await user.validatePassword(password);
+
+      if (!isValidPassword) {
+        return res.status(StatusCodes.UNAUTHORIZED).send({
+          error: 'Invalid account password'
+        });
+      }
+
+      user.password = newPassword;
+      await user.save();
+
+      res.send({
+        user: user.toJSON(),
+      });
+    } catch (e) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+        error: 'Cannot change password, try it again later.'
+      });
+    }
   }
 };
