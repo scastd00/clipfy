@@ -232,7 +232,6 @@ export default {
           await this.$store.dispatch('setUserEmail', response.data.email);
 
           this.error = null;
-          await this.$router.push({ name: 'profile' });
         } catch (e) {
           this.error = e.response.data.error;
         }
@@ -273,7 +272,7 @@ export default {
             newPassword: this.newPassword
           });
 
-          await this.$store.dispatch('setUserPassword', response.data.encryptedPassword);
+          await this.$store.dispatch('setUserPassword', response.data.user.password);
 
           this.error = null;
         } catch (e) {

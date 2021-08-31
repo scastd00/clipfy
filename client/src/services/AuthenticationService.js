@@ -19,5 +19,9 @@ export default {
 
   changePassword(passwords) {
     return Api().post('changePassword', passwords);
+  },
+
+  resetPassword(email) {
+    return Api().post('resetPassword', email);
   }
 };

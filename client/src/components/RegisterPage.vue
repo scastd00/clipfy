@@ -93,7 +93,7 @@ export default {
         setTimeout(() => {
           this.loading = false;
           this.$router.push({ name: 'home' });
-        }, 1000);
+        }, 700);
       } catch (e) {
         this.error = e.response.data.error;
         this.loading = false;

@@ -8,6 +8,7 @@ import HomePage from '@components/HomePage';
 import Profile from '@components/Profile';
 import Orders from '@components/Orders';
 import Wishlist from '@components/Wishlist';
+import PasswordReset from '@components/PasswordReset';
 
 Vue.use(Router);
 
@@ -21,5 +22,6 @@ export default new Router({
     { path: '/profile', name: 'profile', component: Profile },
     { path: '/orders', name: 'orders', component: Orders },
     { path: '/wishlist', name: 'wishlist', component: Wishlist },
+    { path: '/password-reset', name: 'password-reset', component: PasswordReset },
   ]
 });

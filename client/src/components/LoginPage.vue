@@ -37,6 +37,18 @@
         </span>
       </template>
     </v-btn>
+
+    <br/>
+
+    <v-btn
+      color="secondary"
+      class="mt-3"
+      small
+      text
+      @click="navigateTo({ name:'password-reset' })"
+    >
+      Forgot password?
+    </v-btn>
   </credentials-card>
 </template>
 
@@ -64,6 +76,7 @@ export default {
     async login() {
       try {
         this.loading = true;
+
         const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
@@ -76,7 +89,7 @@ export default {
         setTimeout(() => {
           this.loading = false;
           this.$router.push({ name: 'home' });
-        }, 1000);
+        }, 700);
       } catch (e) {
         this.error = e.response.data.error;
         this.loading = false;
@@ -86,6 +99,10 @@ export default {
     dispatchData(data) {
       this.$store.dispatch('setUser', data.user);
       this.$store.dispatch('setToken', data.token);
+    },
+
+    navigateTo(route) {
+      this.$router.push(route);
     }
   }
 };

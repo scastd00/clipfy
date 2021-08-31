@@ -108,5 +108,21 @@ module.exports = {
     } else {
       next();
     }
+  },
+
+  resetPassword(req, res, next) {
+    const schema = Joi.object({
+      email: Joi.string().email()
+    });
+
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      res.status(StatusCodes.BAD_REQUEST).send({
+        error: 'The email address is invalid.'
+      });
+    } else {
+      next();
+    }
   }
 };

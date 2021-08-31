@@ -134,11 +134,37 @@ module.exports = {
       await user.save();
 
       res.send({
-        user: user.toJSON(),
+        user: user.toJSON()
       });
     } catch (e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
         error: 'Cannot change password, try it again later.'
+      });
+    }
+  },
+
+  async resetPassword(req, res) {
+    try {
+      const { email } = req.body;
+
+      const user = await User.findOne({
+        where: {
+          email: email
+        }
+      });
+
+      if (!user) {
+        return res.status(StatusCodes.NOT_FOUND).send({
+          error: 'This email address is not registered.'
+        });
+      }
+
+      res.send({
+        user: user
+      });
+    } catch (e) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+        error: 'Cannot reset password, try again later.'
       });
     }
   }
