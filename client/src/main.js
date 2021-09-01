@@ -3,7 +3,7 @@ import Vuetify from 'vuetify';
 
 import App from './App';
 import router from './router';
-import store from '@/store/store';
+import store from '@/store';
 import vuetifyTheme from './plugins/vuetify';
 
 import { sync } from 'vuex-router-sync';
