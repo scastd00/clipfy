@@ -63,13 +63,15 @@ export default {
           email: this.email
         });
 
-        console.log(response.data.user);
+        console.log(response.data.user.email);
         this.error = null;
 
         setTimeout(() => {
           this.loading = false;
           this.$router.push({ name: 'login' });
         }, 700);
+
+        // Todo: redirect to a page to set the new password
       } catch (e) {
         this.error = e.response.data.error;
         this.loading = false;

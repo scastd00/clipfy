@@ -22,23 +22,43 @@
       </v-alert>
     </div>
 
-    <v-btn
-      :loading="loading"
-      :disabled="loading"
-      class="accent elevation-2"
-      @click="login"
-      width="16%"
-      min-width="150"
-    >
-      Login
-      <template v-slot:loader>
+    <div>
+      <v-btn
+        :loading="loading"
+        :disabled="loading"
+        class="accent elevation-2"
+        @click="login"
+        width="16%"
+        min-width="150"
+      >
+        Login
+        <template v-slot:loader>
         <span>
           Logging in...
         </span>
-      </template>
-    </v-btn>
+        </template>
+      </v-btn>
 
-    <br/>
+      <v-snackbar
+        v-model="snackbar"
+        :bottom="true"
+        outlined
+        text
+        color="success"
+      >
+        {{ snackbarText }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+    </div>
 
     <v-btn
       color="secondary"
@@ -64,7 +84,10 @@ export default {
       email: '',
       password: '',
       error: null,
-      loading: false
+      loading: false,
+      snackbar: false,
+      snackbarText: null,
+      timeout: 900
     };
   },
 
@@ -85,14 +108,16 @@ export default {
         await this.dispatchData(response.data);
 
         this.error = null; // Clear the error when data is entered correctly
+        this.snackbarText = `Logged in successfully as ${response.data.user.username}`;
+        this.snackbar = true;
 
         setTimeout(() => {
           this.loading = false;
           this.$router.push({ name: 'home' });
-        }, 700);
+        }, 1000);
       } catch (e) {
-        this.error = e.response.data.error;
         this.loading = false;
+        this.error = e.response.data.error;
       }
     },
 
