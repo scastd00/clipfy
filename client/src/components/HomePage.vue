@@ -5,8 +5,14 @@
 </template>
 
 <script>
+import ClipCard from '@components/ClipCard';
+
 export default {
-  name: 'HomePage'
+  name: 'HomePage',
+
+  components: {
+    ClipCard
+  }
 };
 </script>
 

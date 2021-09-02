@@ -2,7 +2,7 @@ import Vuetify from 'vuetify';
 
 export default new Vuetify({
   icons: {
-    iconfont: 'mdiSvg',
+    iconfont: 'mdiSvg'
   },
 
   theme: {
@@ -10,26 +10,29 @@ export default new Vuetify({
 
     themes: {
       dark: {
-        primary: '#21CFF3',
+        primary: '#21cff3',
         accent: '#da3eb2',
-        secondary: '#FFD663',
-        success: '#4CAF50',
-        info: '#2196F3',
-        warning: '#FB8C00',
-        error: '#FF5252',
+        secondary: '#ffd663',
+        success: '#4caf50',
+        info: '#2196f3',
+        warning: '#fb8c00',
+        error: '#ff5252',
         _credentials: '#202020',
-        _userCard: '#2a2a2a'
+        _userCard: '#2a2a2a',
+        _clipCard: '#1e1e1e'
       },
 
       light: {
-        primary: '#1976D2',
+        primary: '#1976d2',
         accent: '#c22b9d',
-        secondary: '#30B1DC',
-        success: '#4CAF50',
-        info: '#2196F3',
-        warning: '#FB8C00',
-        error: '#FF5252',
-        _credentials: '#ffffff'
+        secondary: '#30b1dc',
+        success: '#4caf50',
+        info: '#2196f3',
+        warning: '#fb8c00',
+        error: '#ff5252',
+        _credentials: '#fff',
+        _userCard: '#fff',
+        _clipCard: '#fff'
       }
     }
   }
