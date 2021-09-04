@@ -1,7 +1,9 @@
 <template>
-  <v-toolbar
+  <v-app-bar
     block
     class="primary"
+    fixed
+    app
   >
     <v-toolbar-items>
       <v-btn
@@ -21,7 +23,7 @@
       <app-bar-user/>
     </v-toolbar-items>
 
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>

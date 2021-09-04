@@ -14,10 +14,10 @@
             Clip 1
           </template>
           <template v-slot:image>
-            <img width="200" height="200" src="../assets/White.png" alt="hola"/>
+            <img width="250" height="250" src="../assets/White.png" alt="White"/>
           </template>
           <template v-slot:buyNowButton>
-            <v-btn class="green pr-5">
+            <v-btn class="green">
               Buy now
             </v-btn>
           </template>
@@ -39,13 +39,13 @@
       <v-col>
         <clip-card>
           <template v-slot:title>
-            Clip 1
+            Clip 2
           </template>
           <template v-slot:image>
-            <img width="200" height="200" src="../assets/Grey.png" alt="hola"/>
+            <img width="250" height="250" src="../assets/Grey.png" alt="Grey"/>
           </template>
           <template v-slot:buyNowButton>
-            <v-btn class="green pr-5">
+            <v-btn class="green">
               Buy now
             </v-btn>
           </template>
@@ -78,6 +78,231 @@
         </clip-card>
       </v-col>
     </v-row>
+
+    <!-- Examples. Remove after functionality is added. -->
+    <v-row class="mx-16 px-16">
+      <!-- Example -->
+
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 1
+          </template>
+          <template v-slot:image>
+            <img width="250" height="250" src="../assets/White.png" alt="White"/>
+          </template>
+          <template v-slot:buyNowButton>
+            <v-btn class="green">
+              Buy now
+            </v-btn>
+          </template>
+          <template v-slot:addToCartButton>
+            <v-btn>
+              <v-icon>
+                {{ cartIcon }}
+              </v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:clipInfo>
+            Not available
+          </template>
+        </clip-card>
+      </v-col>
+
+      <!-- End of example -->
+
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 2
+          </template>
+          <template v-slot:image>
+            <img width="250" height="250" src="../assets/Grey.png" alt="Grey"/>
+          </template>
+          <template v-slot:buyNowButton>
+            <v-btn class="green">
+              Buy now
+            </v-btn>
+          </template>
+          <template v-slot:addToCartButton>
+            <v-btn>
+              <v-icon>
+                {{ cartIcon }}
+              </v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:clipInfo>
+            Not available
+          </template>
+        </clip-card>
+      </v-col>
+
+      <!-- -->
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 3
+          </template>
+        </clip-card>
+      </v-col>
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 4
+          </template>
+        </clip-card>
+      </v-col>
+    </v-row>
+    <v-row class="mx-16 px-16">
+      <!-- Example -->
+
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 1
+          </template>
+          <template v-slot:image>
+            <img width="250" height="250" src="../assets/White.png" alt="White"/>
+          </template>
+          <template v-slot:buyNowButton>
+            <v-btn class="green">
+              Buy now
+            </v-btn>
+          </template>
+          <template v-slot:addToCartButton>
+            <v-btn>
+              <v-icon>
+                {{ cartIcon }}
+              </v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:clipInfo>
+            Not available
+          </template>
+        </clip-card>
+      </v-col>
+
+      <!-- End of example -->
+
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 2
+          </template>
+          <template v-slot:image>
+            <img width="250" height="250" src="../assets/Grey.png" alt="Grey"/>
+          </template>
+          <template v-slot:buyNowButton>
+            <v-btn class="green">
+              Buy now
+            </v-btn>
+          </template>
+          <template v-slot:addToCartButton>
+            <v-btn>
+              <v-icon>
+                {{ cartIcon }}
+              </v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:clipInfo>
+            Not available
+          </template>
+        </clip-card>
+      </v-col>
+
+      <!-- -->
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 3
+          </template>
+        </clip-card>
+      </v-col>
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 4
+          </template>
+        </clip-card>
+      </v-col>
+    </v-row>
+    <v-row class="mx-16 px-16">
+      <!-- Example -->
+
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 1
+          </template>
+          <template v-slot:image>
+            <img width="250" height="250" src="../assets/White.png" alt="White"/>
+          </template>
+          <template v-slot:buyNowButton>
+            <v-btn class="green">
+              Buy now
+            </v-btn>
+          </template>
+          <template v-slot:addToCartButton>
+            <v-btn>
+              <v-icon>
+                {{ cartIcon }}
+              </v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:clipInfo>
+            Not available
+          </template>
+        </clip-card>
+      </v-col>
+
+      <!-- End of example -->
+
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 2
+          </template>
+          <template v-slot:image>
+            <img width="250" height="250" src="../assets/Grey.png" alt="Grey"/>
+          </template>
+          <template v-slot:buyNowButton>
+            <v-btn class="green">
+              Buy now
+            </v-btn>
+          </template>
+          <template v-slot:addToCartButton>
+            <v-btn>
+              <v-icon>
+                {{ cartIcon }}
+              </v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:clipInfo>
+            Not available
+          </template>
+        </clip-card>
+      </v-col>
+
+      <!-- -->
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 3
+          </template>
+        </clip-card>
+      </v-col>
+      <v-col>
+        <clip-card>
+          <template v-slot:title>
+            Clip 4
+          </template>
+        </clip-card>
+      </v-col>
+    </v-row>
+    <!-- Examples. Remove after functionality is added. -->
+
+    <br/>
+    <!-- Footer (Remove br) -->
   </div>
 </template>
 

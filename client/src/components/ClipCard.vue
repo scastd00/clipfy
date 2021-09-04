@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-6 elevation-4 _clipCard">
+  <div class="mx-7 elevation-6 _clipCard">
     <div class="pt-5">
       <slot name="image"></slot>
     </div>
