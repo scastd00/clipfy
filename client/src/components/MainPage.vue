@@ -17,12 +17,12 @@
             <img width="250" height="250" src="../assets/White.png" alt="White"/>
           </template>
           <template v-slot:buyNowButton>
-            <v-btn class="green">
+            <v-btn class="green elevation-0">
               Buy now
             </v-btn>
           </template>
           <template v-slot:addToCartButton>
-            <v-btn>
+            <v-btn text color="secondary">
               <v-icon>
                 {{ cartIcon }}
               </v-icon>
@@ -45,12 +45,12 @@
             <img width="250" height="250" src="../assets/Grey.png" alt="Grey"/>
           </template>
           <template v-slot:buyNowButton>
-            <v-btn class="green">
+            <v-btn class="green elevation-0">
               Buy now
             </v-btn>
           </template>
           <template v-slot:addToCartButton>
-            <v-btn>
+            <v-btn text color="secondary">
               <v-icon>
                 {{ cartIcon }}
               </v-icon>
@@ -300,6 +300,37 @@
       </v-col>
     </v-row>
     <!-- Examples. Remove after functionality is added. -->
+
+    <!--  -->
+    <!-- Todo: check for a better key -->
+    <v-row v-for="array in clips" :key="array">
+      <v-col v-for="clip of array" :key="clip.clipKey">
+        <clip-card>
+          <template v-slot:title>
+            {{ clip.name }}
+          </template>
+          <template v-slot:image>
+            <v-img width="250" height="250" :src="clip.imageURL" :alt="clip.name"/>
+          </template>
+          <template v-slot:buyNowButton>
+            <v-btn class="green">
+              Buy now
+            </v-btn>
+          </template>
+          <template v-slot:addToCartButton>
+            <v-btn>
+              <v-icon>
+                {{ cartIcon }}
+              </v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:clipInfo>
+            {{ clipInfo(clip) }}
+          </template>
+        </clip-card>
+      </v-col>
+    </v-row>
+    <!--  -->
 
     <br/>
     <!-- Footer (Remove br) -->
@@ -321,8 +352,18 @@ export default {
     return {
       msg: 'Bienvenido a Clipfy',
       url: '',
-      cartIcon: mdiCartPlus
+      cartIcon: mdiCartPlus,
+      clips: {
+        a: [],
+        b: []
+      }
     };
+  },
+
+  methods: {
+    clipInfo(clip) {
+      return clip.stock > 0 ? 'Available' : 'Not available';
+    }
   }
 };
 </script>
