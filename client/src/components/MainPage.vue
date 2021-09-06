@@ -17,8 +17,8 @@
             <img width="250" height="250" src="../assets/White.png" alt="White"/>
           </template>
           <template v-slot:buyNowButton>
-            <v-btn class="green elevation-0">
-              Buy now
+            <v-btn text class="green" color="black">
+              14.50€
             </v-btn>
           </template>
           <template v-slot:addToCartButton>
@@ -45,8 +45,8 @@
             <img width="250" height="250" src="../assets/Grey.png" alt="Grey"/>
           </template>
           <template v-slot:buyNowButton>
-            <v-btn class="green elevation-0">
-              Buy now
+            <v-btn text class="green" color="black">
+              12.70€
             </v-btn>
           </template>
           <template v-slot:addToCartButton>
@@ -313,8 +313,8 @@
             <v-img width="250" height="250" :src="clip.imageURL" :alt="clip.name"/>
           </template>
           <template v-slot:buyNowButton>
-            <v-btn class="green">
-              Buy now
+            <v-btn text class="green">
+              {{ clip.price }}
             </v-btn>
           </template>
           <template v-slot:addToCartButton>
