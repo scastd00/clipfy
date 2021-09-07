@@ -53,10 +53,6 @@ export default {
   created() {
     const fetchData = async() => {
       this.clips = (await ClipService.getAllClips()).data;
-      for (let i in this.clips) {
-        let clip = this.clips[i];
-        console.log(clip);
-      }
     };
 
     fetchData();
