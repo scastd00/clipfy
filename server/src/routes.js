@@ -9,4 +9,6 @@ module.exports = (app) => {
   app.post('/changeUsername', AuthenticationControllerPolicy.changeUsername, AuthenticationController.changeUsername);
   app.post('/changePassword', AuthenticationControllerPolicy.changePassword, AuthenticationController.changePassword);
   app.post('/resetPassword', AuthenticationControllerPolicy.resetPassword, AuthenticationController.resetPassword);
+
+  // app.get('/getClips');
 };
