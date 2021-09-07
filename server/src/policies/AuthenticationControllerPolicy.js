@@ -11,22 +11,24 @@ module.exports = {
 
     const { error } = schema.validate(req.body);
 
-    if (error) { // Error is not null or undefined
+    if (error) { // Error is NOT null or undefined
+      res.status(StatusCodes.BAD_REQUEST);
+
       switch (error.details[0].context.key) {
         case 'username':
-          res.status(StatusCodes.BAD_REQUEST).send({
+          res.send({
             error: 'Username must contain only alphanumeric characters and must be between 3 and 20 characters.'
           });
           break;
 
         case 'email':
-          res.status(StatusCodes.BAD_REQUEST).send({
+          res.send({
             error: 'The email address provided must be valid.'
           });
           break;
 
         case 'password':
-          res.status(StatusCodes.BAD_REQUEST).send({
+          res.send({
             error: `The password provided failed to match the following rules:
               1. It must contain ONLY the following characters: lower/upper case and numerics.
               2. It must be between 8 and 32 characters in length.`
@@ -34,7 +36,7 @@ module.exports = {
           break;
 
         default:
-          res.status(StatusCodes.BAD_REQUEST).send({
+          res.send({
             error: 'Invalid credentials.'
           });
       }
@@ -87,21 +89,23 @@ module.exports = {
     const { error } = schema.validate(req.body);
 
     if (error) {
+      res.status(StatusCodes.BAD_REQUEST);
+
       switch (error.details[0].context.key) {
         case 'password':
-          res.status(StatusCodes.BAD_REQUEST).send({
+          res.send({
             error: 'Your password does not meet the requirements.'
           });
           break;
 
         case 'newPassword':
-          res.status(StatusCodes.BAD_REQUEST).send({
+          res.send({
             error: 'New password is invalid (alphanumeric, 3-20 characters in length).'
           });
           break;
 
         default:
-          res.status(StatusCodes.BAD_REQUEST).send({
+          res.send({
             error: 'Invalid credentials.'
           });
       }

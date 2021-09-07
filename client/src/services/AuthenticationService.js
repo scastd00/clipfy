@@ -10,18 +10,18 @@ export default {
   },
 
   changeEmail(emails) {
-    return Api().post('changeEmail', emails);
+    return Api().put('changeEmail', emails);
   },
 
   changeUsername(information) {
-    return Api().post('changeUsername', information);
+    return Api().put('changeUsername', information);
   },
 
   changePassword(passwords) {
-    return Api().post('changePassword', passwords);
+    return Api().put('changePassword', passwords);
   },
 
   resetPassword(email) {
-    return Api().post('resetPassword', email);
+    return Api().put('resetPassword', email);
   }
 };

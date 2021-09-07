@@ -1,8 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('Clip', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+
     clipKey: {
       type: DataTypes.STRING(4),
-      primaryKey: true
+      unique: true,
+      allowNull: false
     },
 
     name: {

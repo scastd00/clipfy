@@ -2,35 +2,63 @@ const { Clip } = require('../models');
 const { StatusCodes } = require('http-status-codes');
 
 module.exports = {
-  async getAvailableClips(req, res) {
-    const clips = await Clip.findAll({
-      where: {
-        stock: {
-          gt: 0
-        }
-      }
-    });
+  async addClip(req, res) {
+    try {
+      const clip = await Clip.create(req.body);
 
-    if (!clips) {
-      res.status(StatusCodes.NOT_FOUND).send({
-        error: 'There are no available clips'
+      res.send({
+        clip: clip.toJSON()
+      });
+    } catch (e) {
+      res.status(StatusCodes.BAD_REQUEST).send({
+        error: 'Invalid clip format'
       });
     }
-
-    return clips;
   },
 
   async getAllClips(req, res) {
-    const clips = await Clip.findAll({
-      attributes: ['clipKey', 'name', 'stock', 'price', 'description', 'imageURL']
-    });
+    try {
+      const clips = await Clip.findAll();
 
-    if (!clips) {
-      res.status(StatusCodes.NOT_FOUND).send({
-        error: 'There are no available clips'
-      });
+      if (!clips) {
+        res.status(StatusCodes.NOT_FOUND).send({
+          error: 'There are no available clips'
+        });
+      }
+
+      let results = [];
+      let i = 0;
+
+      while (clips.length) {
+        results.push({ id: i, value: clips.splice(0, 4)});
+        i++;
+      }
+
+      res.send(results);
+    } catch (e) {
+      console.log(e);
     }
+  },
 
-    return clips;
+  async getAvailableClips(req, res) {
+    try {
+      const clips = await Clip.findAll({
+        where: {
+          stock: {
+            gt: 0
+          }
+        }
+      });
+
+      if (!clips) {
+        res.status(StatusCodes.NOT_FOUND).send({
+          error: 'There are no available clips'
+        });
+      }
+
+      return clips;
+    } catch (e) {
+      console.log(e);
+    }
   }
 };
