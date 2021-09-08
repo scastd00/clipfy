@@ -113,7 +113,7 @@ export default {
 
         setTimeout(() => {
           this.loading = false;
-          this.$router.push({ name: 'home' });
+          this.$router.push({ name: 'landing' });
         }, 1000);
       } catch (e) {
         this.loading = false;
