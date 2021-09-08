@@ -7,6 +7,7 @@
 - Orders will be named and user can add items to them (order card have item count in that order).
 - Different tabs for main description of the clips and other for the shop.
 - Customization of clips (sizes, colors, images, etc.)
+- Multiple photos for clips (Arrows to switch between them).
 
 # Future
 

@@ -5,7 +5,7 @@ module.exports = {
   create(req, res, next) {
     const schema = Joi.object({
       clipKey: Joi.string().alphanum().min(4).max(4),
-      name: Joi.string().min(4).max(18), 
+      name: Joi.string().min(4).max(18),
       stock: Joi.number().greater(0),
       price: Joi.number().greater(0),
       description: Joi.string().max(20),
@@ -51,6 +51,12 @@ module.exports = {
         case 'imageURL':
           res.send({
             error: 'Image URL must be a valid URL'
+          });
+          break;
+
+        default:
+          res.send({
+            error: error.details
           });
           break;
       }

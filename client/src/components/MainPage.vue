@@ -3,29 +3,65 @@
     <h1>{{ msg }}</h1>
 
     <br/>
-    <br/>
 
-    <v-row v-for="obj in clips" :key="obj.id">
-      <v-col v-for="clip of obj.value" :key="clip.clipKey">
+    <v-row
+      v-for="obj in clips"
+      :key="obj.id"
+      class="px-15"
+    >
+      <v-col
+        v-for="clip of obj.value"
+        :key="clip.clipKey"
+        class="px-5 py-8"
+      >
         <clip-card>
+          <template v-slot:image>
+            <v-row>
+              <v-col>
+                <img width="230" height="230" :src="clip.imageURL" :alt="clip.name"/>
+              </v-col>
+            </v-row>
+          </template>
+
           <template v-slot:title>
             {{ clip.name }}
           </template>
-          <template v-slot:image>
-            <v-img width="250" height="250" :src="clip.imageURL" :alt="clip.name"/>
+
+          <template v-slot:shortDescription>
+            {{ clip.description }}
           </template>
+
           <template v-slot:buyNowButton>
-            <v-btn text class="green">
-              {{ clip.price }}
+            <v-btn
+              text
+              class="green"
+            >
+              Buy now - {{ clip.price }}
             </v-btn>
           </template>
+
           <template v-slot:addToCartButton>
-            <v-btn>
-              <v-icon>
-                {{ cartIcon }}
-              </v-icon>
-            </v-btn>
+            <v-tooltip bottom>
+              <template
+                v-slot:activator="{ on }"
+              >
+                <v-btn
+                  v-on="on"
+                  text
+                  color="secondary"
+                >
+                  <v-icon>
+                    {{ cartIcon }}
+                  </v-icon>
+                </v-btn>
+              </template>
+
+              <span>
+                Add to cart
+              </span>
+            </v-tooltip>
           </template>
+
           <template v-slot:clipInfo>
             {{ clipInfo(clip) }}
           </template>
@@ -40,8 +76,8 @@
 
 <script>
 import ClipCard from '@components/ClipCard';
-import { mdiCartPlus } from '@mdi/js';
 import ClipService from '@/services/ClipService';
+import { mdiCartPlus } from '@mdi/js';
 
 export default {
   name: 'MainPage',
@@ -53,6 +89,7 @@ export default {
   created() {
     const fetchData = async() => {
       this.clips = (await ClipService.getAllClips()).data;
+      console.log(this.clips);
     };
 
     fetchData();
@@ -69,7 +106,13 @@ export default {
 
   methods: {
     clipInfo(clip) {
-      return clip.stock > 0 ? 'Available' : 'Not available';
+      if (clip.stock >= 20) {
+        return 'Available';
+      } else if (clip.stock > 0 && clip.stock < 20) {
+        return `${ clip.stock } units left`;
+      } else {
+        return 'No stock';
+      }
     }
   }
 };

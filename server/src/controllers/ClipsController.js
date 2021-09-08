@@ -7,11 +7,11 @@ module.exports = {
       const clip = await Clip.create(req.body);
 
       res.send({
-        clip: clip.toJSON()
+        clips: clip.toJSON()
       });
     } catch (e) {
       res.status(StatusCodes.BAD_REQUEST).send({
-        error: 'Invalid clip format'
+        error: 'Clip key or name already exists in the database',
       });
     }
   },
