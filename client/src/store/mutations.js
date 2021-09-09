@@ -18,5 +18,15 @@ export default {
 
   setUserPassword(state, password) {
     state.user.password = password;
+  },
+
+  addClipToCart(state, data) {
+    const updateIndex = state.user.cart.findIndex(element => element.clipKey === data.clipKey);
+
+    if (updateIndex !== -1) {
+      state.user.cart[updateIndex].quantity++;
+    } else {
+      state.user.cart.push(data);
+    }
   }
 };

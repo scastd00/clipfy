@@ -20,6 +20,7 @@
 
     <v-toolbar-items>
       <app-bar-theme-switcher/>
+      <app-bar-shopping-cart v-if="$store.state.isUserLoggedIn"/>
       <app-bar-user/>
     </v-toolbar-items>
 
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import AppBarShoppingCart from '@components/AppBarShoppingCart';
 import AppBarThemeSwitcher from '@components/AppBarThemeSwitcher';
 import AppBarUser from '@components/AppBarUser';
 
@@ -34,6 +36,7 @@ export default {
   name: 'NavigationBar',
 
   components: {
+    AppBarShoppingCart,
     AppBarThemeSwitcher,
     AppBarUser
   },

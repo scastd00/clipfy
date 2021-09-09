@@ -7,6 +7,7 @@
         :rules="[required]"
         label="Username"
         v-model="username"
+        hint="At least 3 characters"
       />
 
       <v-text-field
@@ -22,6 +23,7 @@
         :rules="[required]"
         type="password"
         label="Password"
+        hint="At least 8 characters"
         v-model="password"
       />
     </form>

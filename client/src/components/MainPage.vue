@@ -49,6 +49,7 @@
                   v-on="on"
                   text
                   color="secondary"
+                  @click="addClipToCart(clip, 1)"
                 >
                   <v-icon>
                     {{ cartIcon }}
@@ -89,7 +90,6 @@ export default {
   created() {
     const fetchData = async() => {
       this.clips = (await ClipService.getAllClips()).data;
-      console.log(this.clips);
     };
 
     fetchData();
@@ -113,6 +113,13 @@ export default {
       } else {
         return 'No stock';
       }
+    },
+
+    async addClipToCart(clip, quantity) {
+      await this.$store.dispatch('addClipToCart', {
+        clipKey: clip.clipKey,
+        quantity: quantity
+      });
     }
   }
 };

@@ -36,6 +36,11 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+
+    cart: {
+      type: DataTypes.JSON,
+      defaultValue: []
     }
   },
   {

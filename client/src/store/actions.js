@@ -22,5 +22,9 @@ export default {
   clearData({ commit }) {
     commit('setToken', null);
     commit('setUser', null);
+  },
+
+  addClipToCart({ commit }, clipAndQuantity) {
+    commit('addClipToCart', clipAndQuantity);
   }
 };
