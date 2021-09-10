@@ -117,7 +117,7 @@ export default {
 
     async addClipToCart(clip, quantity) {
       await this.$store.dispatch('addClipToCart', {
-        clipKey: clip.clipKey,
+        clip: clip,
         quantity: quantity
       });
     }

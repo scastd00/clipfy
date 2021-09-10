@@ -21,7 +21,7 @@ export default {
   },
 
   addClipToCart(state, data) {
-    const updateIndex = state.user.cart.findIndex(element => element.clipKey === data.clipKey);
+    const updateIndex = state.user.cart.findIndex(element => element.clip.clipKey === data.clip.clipKey);
 
     if (updateIndex !== -1) {
       state.user.cart[updateIndex].quantity++;
