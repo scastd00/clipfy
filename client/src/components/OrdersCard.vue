@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <span>hello orders</span>
+  <div class="green">
+    <slot name="name"></slot>
+    <slot name="smallImg"></slot>
+    <slot name="quantity"></slot>
+    <slot name="description"></slot>
   </div>
 </template>
 
