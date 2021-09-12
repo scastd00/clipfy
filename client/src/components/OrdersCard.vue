@@ -1,10 +1,14 @@
 <template>
-  <div class="green">
-    <slot name="name"></slot>
+  <v-layout align-center class="green black--text">
     <slot name="smallImg"></slot>
+    <v-spacer/>
+    <slot name="name"></slot>
+    <v-spacer/>
     <slot name="quantity"></slot>
-    <slot name="description"></slot>
-  </div>
+    <v-spacer/>
+    <slot name="subtotal"></slot>
+    <v-spacer/>
+  </v-layout>
 </template>
 
 <script>

@@ -8,26 +8,35 @@
       </v-toolbar>
 
       <div class="mt-4">
-        <v-row v-for="item of cart" :key="item.clip.clipKey" class="my-3" no-gutters>
+        <v-row v-for="item of cart" :key="item.clip.clipKey" class="my-4">
           <orders-card>
+            <template v-slot:smallImg>
+              <v-img
+                class="my-3 ml-3"
+                max-height="130"
+                max-width="130"
+                :alt="item.clip.clipKey"
+                :src="item.clip.imageURL"
+              />
+            </template>
+
             <template v-slot:name>
               {{ item.clip.name }}
             </template>
 
-            <template v-slot:smallImg>
-              <img width="100" height="100" :alt="item.clip.clipKey" :src="item.clip.imageURL"/>
+            <template v-slot:quantity>
+              <h3>Quantity: {{ item.quantity }}</h3>
             </template>
 
-            <template v-slot:quantity>
-              <h3>Quantity:</h3>
-              {{ item.quantity }}
+            <template v-slot:subtotal>
+              <h3>Price: {{ subtotalClip(item.clip, item.quantity) }}€</h3>
             </template>
           </orders-card>
         </v-row>
       </div>
 
       <div class="my-9">
-        <h2>Total: {{ totalPrice }}</h2>
+        <h2>Total: {{ totalPrice }}€</h2>
       </div>
     </v-flex>
   </v-layout>
@@ -51,7 +60,7 @@ export default {
         sum += parseFloat(item.clip.price) * parseFloat(item.quantity);
       }
 
-      return sum;
+      return sum.toFixed(2);
     }
   },
 
@@ -59,6 +68,12 @@ export default {
     return {
       cart: this.$store.state.user.cart
     };
+  },
+
+  methods: {
+    subtotalClip(clip, quantity) {
+      return (parseFloat(clip.price) * parseFloat(quantity)).toFixed(2);
+    }
   }
 };
 </script>

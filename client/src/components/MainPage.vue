@@ -36,7 +36,7 @@
               text
               class="green"
             >
-              Buy now - {{ clip.price }}
+              Buy now - {{ clip.price }}€
             </v-btn>
           </template>
 
